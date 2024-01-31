@@ -112,7 +112,7 @@ const LoginPage = () => {
   }
 
   const handleGoogleLogin = () => {
-    window.location.href = 'http://localhost:8000/api/v1/auth/google'
+    window.location.href = 'https://api.taskroom.ygy3389.com/api/v1/auth/google'
   }
 
   return (
