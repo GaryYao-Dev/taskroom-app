@@ -1,7 +1,7 @@
 {
   "name": "taskroom-server-client",
   "version": "0.1.0",
-  "homepage": "https://garyya0.github.io/taskroom-app/",
+  "homepage": "https://garyya0.github.io/taskroom-app",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",
