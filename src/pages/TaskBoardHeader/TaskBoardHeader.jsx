@@ -180,7 +180,7 @@ export default function TaskBoardHeader({ children }) {
               flexGrow: 2,
               alignItems: 'center',
             }}>
-            <Button>
+            <Button onClick={() => navigate('/')}>
               <Avatar
                 src="/images/TR_logo.png"
                 alt="TR_Logo"
