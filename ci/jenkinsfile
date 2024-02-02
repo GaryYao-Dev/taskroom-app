@@ -5,13 +5,27 @@ pipeline {
     }
     stages {
         stage('Build Docker Image') {
-        steps {
-          // 构建 Docker 镜像
-          // sh 'docker build -t taskroom-client .'
-          script {
-            docker.build('taskroom-client')
+          steps {
+            // 构建 Docker 镜像
+            // sh 'docker build -t taskroom-client .'
+            script {
+              docker.build('taskroom-client')
+            }
           }
         }
+
+        stage('Check Docker Container') {
+          steps {
+            script {
+              // 检查是否有同名的容器正在运行
+              sh(script: 'docker ps -q --filter "name=taskroom-client"', returnStdout: true).trim()
+              if (result) {
+                // 如果有，停止并删除该容器
+                sh 'docker stop taskroom-client'
+                sh 'docker rm taskroom-client'
+              }
+            }
+          }
         }
 
         stage('Run Docker Container') {
