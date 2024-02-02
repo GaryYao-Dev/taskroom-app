@@ -14,23 +14,30 @@ pipeline {
         }
         }
 
-        stage('Push Docker Image') {
+        stage('Run Docker Container') {
           steps {
-            // 将镜像推送到 Docker Registry
-            // sh 'docker tag taskroom-client docker.ygy3389.com/taskroom-client'
-            // sh 'docker push docker.ygy3389.com/taskroom-client'
-            script {
-              docker.image('taskroom-client').tag('docker.ygy3389.com/taskroom-client').push('docker.ygy3389.com/taskroom-client')
-            }
+            sh 'docker run -d --name="taskroom-client" --net="bridge" -e TZ="Australia/Sydney" -e HOST_OS="Unraid" -p "3001:3000/tcp" "docker.ygy3389.com/taskroom-client"'
           }
         }
 
-        stage('Deploy') {
-          steps {
-            // 部署应用
-            sh 'ssh root@192.168.1.111 "docker pull docker.ygy3389.com/taskroom-client && docker run -d --name="taskroom-client" --net="bridge" -e TZ="Australia/Sydney" -e HOST_OS="Unraid" -p "3001:3000/tcp" "docker.ygy3389.com/taskroom-client""'
-          }
-        }
+        // stage('Push Docker Image') {
+        //   steps {
+        //     // 将镜像推送到 Docker Registry
+        //     // sh 'docker tag taskroom-client docker.ygy3389.com/taskroom-client'
+        //     // sh 'docker push docker.ygy3389.com/taskroom-client'
+        //     script {
+        //       docker.image('taskroom-client').tag('docker.ygy3389.com/taskroom-client').push('docker.ygy3389.com/taskroom-client')
+        //     }
+        //   }
+        // }
+
+        // stage('Deploy') {
+        //   steps {
+        //     // 部署应用
+        //     sh 'ssh root@192.168.1.111 "docker pull docker.ygy3389.com/taskroom-client && docker run -d --name="taskroom-client" --net="bridge" -e TZ="Australia/Sydney" -e HOST_OS="Unraid" -p "3001:3000/tcp" "docker.ygy3389.com/taskroom-client""'
+        //   }
+        // }
     }
 }
 
+// docker run -d --name='Jenkins' --net='bridge' --privileged=true -e TZ="Australia/Sydney" -e HOST_OS="Unraid" -p '8082:8080/tcp' -v '/var/run/docker.sock':'/var/run/docker.sock':'rw' -v '/mnt/user/appdata/Jenkins':'/var/jenkins_home':'rw' 'jenkins/jenkins2' && docker network connect socket_proxy Jenkins
