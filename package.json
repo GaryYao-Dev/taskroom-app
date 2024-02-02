@@ -1,7 +1,6 @@
 {
   "name": "taskroom-server-client",
   "version": "0.1.0",
-  "homepage": "https://garyya0.github.io/taskroom-app",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -28,8 +27,6 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "dev": "concurrently --names \"Server,Client\" -c \"bgBlue.bold,bgMagenta.bold\" \"cd ../server && npm run start\" \"npm run start\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -60,7 +57,6 @@
     "concurrently": "^8.2.0",
     "eslint": "^8.44.0",
     "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-prettier": "^8.3.0",
-    "gh-pages": "^6.1.1"
+    "eslint-config-prettier": "^8.3.0"
   }
 }
