@@ -3,13 +3,14 @@ pipeline {
     tools {
       nodejs 'Node_18'
     }
+    environment {
+        CONTAINER_NAME = 'taskroom-client'
+    }
     stages {
         stage('Build Docker Image') {
           steps {
-            // 构建 Docker 镜像
-            // sh 'docker build -t taskroom-client .'
             script {
-              docker.build('taskroom-client')
+              docker.build(CONTAINER_NAME)
             }
           }
         }
@@ -18,11 +19,11 @@ pipeline {
           steps {
             script {
               // 检查是否有同名的容器正在运行
-              sh(script: 'docker ps -q --filter "name=taskroom-client"', returnStdout: true).trim()
+              result = sh(script: "docker ps -q --filter name=\$CONTAINER_NAME", returnStdout: true).trim()
               if (result) {
                 // 如果有，停止并删除该容器
-                sh 'docker stop taskroom-client'
-                sh 'docker rm taskroom-client'
+                sh "docker stop \$CONTAINER_NAME"
+                sh "docker rm \$CONTAINER_NAME"
               }
             }
           }
@@ -30,7 +31,7 @@ pipeline {
 
         stage('Run Docker Container') {
           steps {
-            sh 'docker run -d --name="taskroom-client" --net="bridge" -e TZ="Australia/Sydney" -e HOST_OS="Unraid" -p "3001:3000/tcp" "taskroom-client"'
+            sh "docker run -d --name=\"\$CONTAINER_NAME\" --net=\"bridge\" -e TZ=\"Australia/Sydney\" -e HOST_OS=\"Unraid\" -p \"3001:3000/tcp\" \"\$CONTAINER_NAME\""
           }
         }
     }
