@@ -19,7 +19,9 @@ pipeline {
             // 将镜像推送到 Docker Registry
             // sh 'docker tag taskroom-client docker.ygy3389.com/taskroom-client'
             // sh 'docker push docker.ygy3389.com/taskroom-client'
-            docker.image('taskroom-client').tag('docker.ygy3389.com/taskroom-client').push('docker.ygy3389.com/taskroom-client')
+            script {
+              docker.image('taskroom-client').tag('docker.ygy3389.com/taskroom-client').push('docker.ygy3389.com/taskroom-client')
+            }
           }
         }
 
