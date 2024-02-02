@@ -16,7 +16,7 @@ pipeline {
 
         stage('Run Docker Container') {
           steps {
-            sh 'docker run -d --name="taskroom-client" --net="bridge" -e TZ="Australia/Sydney" -e HOST_OS="Unraid" -p "3001:3000/tcp" "docker.ygy3389.com/taskroom-client"'
+            sh 'docker run -d --name="taskroom-client" --net="bridge" -e TZ="Australia/Sydney" -e HOST_OS="Unraid" -p "3001:3000/tcp" "taskroom-client"'
           }
         }
 
