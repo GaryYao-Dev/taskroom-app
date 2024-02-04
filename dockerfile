@@ -17,6 +17,5 @@ COPY . .
 EXPOSE 3000
 
 # 运行应用程序
-CMD ["npm", "run", "build"]
-CMD ["npm", "run", "start_server"]
+CMD npm run build && npm run start_server
 
