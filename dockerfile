@@ -18,5 +18,5 @@ EXPOSE 3000
 
 # 运行应用程序
 CMD ["npm", "run", "build"]
-CMD ["serve", "-s", "build", "-l", "3000"]
+CMD ["npm", "run", "start_server"]
 

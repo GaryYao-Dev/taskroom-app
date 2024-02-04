@@ -30,6 +30,7 @@
   "scripts": {
     "dev": "concurrently --names \"Server,Client\" -c \"bgBlue.bold,bgMagenta.bold\" \"cd ../server && npm run start\" \"npm run start\"",
     "start": "react-scripts start",
+    "start_server": "serve -s build -l 3000",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
