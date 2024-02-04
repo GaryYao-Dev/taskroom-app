@@ -17,5 +17,6 @@ COPY . .
 EXPOSE 3000
 
 # 运行应用程序
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "build"]
+CMD ["serve", "-s", "build", "-l", "3000"]
 
