@@ -112,7 +112,7 @@ const LoginPage = () => {
   }
 
   const handleGoogleLogin = () => {
-    window.location.href = 'https://api.taskroom.ygy3389.com/api/v1/auth/google'
+    window.location.href = 'https://api.taskroom.garyyao.au/api/v1/auth/google'
   }
 
   return (
