@@ -1,41 +1,48 @@
-import axios from 'axios';
+import axios from 'axios'
 
 const backendHttpInstance = () => {
-  const axiosInstance = axios.create();
-  axiosInstance.defaults.baseURL = 'https://api.taskroom.ygy3389.com/api/v1';
+  const axiosInstance = axios.create()
+  axiosInstance.defaults.baseURL = 'https://api.taskroom.garyyao.au/api/v1'
 
-  axiosInstance.defaults.headers.common.Authorization = localStorage.getItem('token')
+  axiosInstance.defaults.headers.common.Authorization = localStorage.getItem(
+    'token'
+  )
     ? `Bearer ${localStorage.getItem('token')}`
-    : '';
+    : ''
 
   axiosInstance.interceptors.response.use(
     (config) => {
       // update jwt
-      const { authorization } = config.headers;
+      const { authorization } = config.headers
       if (authorization && authorization.startsWith('Bearer')) {
-        localStorage.setItem('token', authorization);
+        localStorage.setItem('token', authorization)
       }
 
-      return config;
+      return config
     },
     (error) => {
-      error && console.log(error.response);
+      error && console.log(error.response)
 
       // jwt expired or invalid
-      if (error && error.response && error.response.status === 401 && error.response.data.message !== 'Email not verified') {
-        localStorage.removeItem('token');
+      if (
+        error &&
+        error.response &&
+        error.response.status === 401 &&
+        error.response.data.message !== 'Email not verified'
+      ) {
+        localStorage.removeItem('token')
         // return '';
       }
 
-      return Promise.reject(error);
+      return Promise.reject(error)
     }
-  );
-  return axiosInstance;
-};
+  )
+  return axiosInstance
+}
 
 const http = (endpoint, config) => {
-  const axiosInstance = backendHttpInstance();
-  return axiosInstance(endpoint, { ...config });
-};
+  const axiosInstance = backendHttpInstance()
+  return axiosInstance(endpoint, { ...config })
+}
 
-export default http;
+export default http
